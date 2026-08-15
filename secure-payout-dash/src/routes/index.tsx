@@ -6,6 +6,7 @@ import { WalletHeader } from "@/components/web3/WalletHeader";
 import { SingleWithdrawForm } from "@/components/web3/SingleWithdrawForm";
 import { BatchWithdrawForm } from "@/components/web3/BatchWithdrawForm";
 import { TransactionTable } from "@/components/web3/TransactionTable";
+import { SystemStatusBanner } from "@/components/web3/SystemStatusBanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -87,6 +88,8 @@ function Dashboard() {
             ))}
           </div>
         </section>
+
+        <SystemStatusBanner />
 
         <Notice />
 

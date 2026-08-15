@@ -1,11 +1,35 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiQuery, ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ApiKeyService } from './api-key.service';
 
 export class GenerateApiKeyDto {
+  @ApiProperty({
+    description: 'Identifier or descriptive label for this API Secret Key',
+    example: 'Production Backend Server',
+  })
   name: string;
+
+  @ApiPropertyOptional({
+    description: 'Developer or merchant email address',
+    example: 'developer@platform.local',
+    default: 'developer@platform.local',
+  })
   merchantEmail?: string;
+
+  @ApiPropertyOptional({
+    description: 'Target network environment: testnet (ChainId: 97) or mainnet (ChainId: 56)',
+    example: 'testnet',
+    enum: ['testnet', 'mainnet'],
+    default: 'testnet',
+  })
   environment?: 'testnet' | 'mainnet';
+
+  @ApiPropertyOptional({
+    description: 'Permissions granted to this secret key',
+    example: ['withdraw:read', 'withdraw:write'],
+    default: ['withdraw:read', 'withdraw:write'],
+    type: [String],
+  })
   permissions?: string[];
 }
 
