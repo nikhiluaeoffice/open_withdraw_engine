@@ -1,0 +1,7 @@
+const batchABI = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+{ "inputs": [{ "internalType": "address[]", "name": "recipients", "type": "address[]" }, { "internalType": "uint256[]", "name": "amounts", "type": "uint256[]" }], "name": "batchTransferBNB", "outputs": [], "stateMutability": "payable", "type": "function" },
+{ "inputs": [{ "internalType": "address[]", "name": "tokens", "type": "address[]" }, { "internalType": "address[][]", "name": "recipientsPerToken", "type": "address[][]" }, { "internalType": "uint256[][]", "name": "amountsPerToken", "type": "uint256[][]" }], "name": "batchTransferGrouped", "outputs": [], "stateMutability": "payable", "type": "function" },
+{ "inputs": [{ "internalType": "address", "name": "token", "type": "address" }, { "internalType": "address[]", "name": "recipients", "type": "address[]" }, { "internalType": "uint256[]", "name": "amounts", "type": "uint256[]" }], "name": "batchTransferTokenFromSender", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+{ "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" },
+{ "inputs": [{ "internalType": "address", "name": "_newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }]
+export default batchABI;
