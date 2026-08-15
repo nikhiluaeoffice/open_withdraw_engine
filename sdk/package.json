@@ -1,0 +1,25 @@
+{
+  "name": "@reusable-withdraw/sdk",
+  "version": "1.0.0",
+  "description": "Developer Client SDK for Reusable Crypto Withdrawal Services",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "crypto",
+    "withdrawal",
+    "sdk",
+    "bnb",
+    "usdt",
+    "web3",
+    "blockchain"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
