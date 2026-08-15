@@ -1,4 +1,5 @@
-import { Copy, LogOut, Wallet, Globe, KeyRound, Code, FileText, ExternalLink } from "lucide-react";
+import { Copy, LogOut, Wallet, Globe, Code, FileText, ExternalLink, LayoutDashboard } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useWallet } from "@/lib/web3/wallet";
@@ -31,20 +32,11 @@ export function WalletHeader() {
     switchChain,
   } = useWallet();
 
-  const handleScrollToSdk = () => {
-    const el = document.getElementById("developer-sdk-settings");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      el.classList.add("ring-2", "ring-primary", "ring-offset-2");
-      setTimeout(() => el.classList.remove("ring-2", "ring-primary", "ring-offset-2"), 2500);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-30 border-b border-glass-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-3.5 sm:px-5 py-3 sm:py-4">
         {/* Brand Logo & Title */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 hover:opacity-90 transition-opacity">
           <img src="/logo.svg" alt="ChainPayout Logo" className="size-8 sm:size-10 rounded-full shadow-md transition-transform hover:scale-105" />
           <div>
             <h1 className="text-base sm:text-lg font-semibold leading-tight">
@@ -52,20 +44,31 @@ export function WalletHeader() {
             </h1>
             <p className="hidden xs:block text-[11px] sm:text-xs text-muted-foreground">Non-custodial withdrawal console</p>
           </div>
-        </div>
+        </Link>
 
         {/* Action Controls & Network Switcher */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          {/* Developer SDK Button */}
-          <button
-            type="button"
-            onClick={handleScrollToSdk}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-primary/40 bg-primary/10 px-3 py-1.5 backdrop-blur-md text-[11px] sm:text-xs font-semibold text-primary hover:bg-primary/20 hover:border-primary transition-all cursor-pointer shadow-sm active:scale-95"
-            title="Open Developer SDK & API Keys Settings"
+          {/* Navigation Links */}
+          <Link
+            to="/"
+            activeProps={{ className: "border-primary bg-primary/20 text-primary font-bold shadow-sm" }}
+            inactiveProps={{ className: "border-glass-border bg-glass text-muted-foreground hover:text-foreground hover:bg-secondary/50" }}
+            className="inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 backdrop-blur-md text-[11px] sm:text-xs transition-all cursor-pointer"
+          >
+            <LayoutDashboard className="size-3.5 sm:size-4 shrink-0" />
+            <span>Dashboard</span>
+          </Link>
+
+          <Link
+            to="/docs"
+            activeProps={{ className: "border-primary bg-primary/20 text-primary font-bold shadow-sm" }}
+            inactiveProps={{ className: "border-primary/40 bg-primary/10 text-primary hover:bg-primary/20" }}
+            className="inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 backdrop-blur-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer active:scale-95"
+            title="Open Developer SDK & API Documentation Page"
           >
             <Code className="size-3.5 sm:size-4 text-primary shrink-0" />
-            <span>Developer SDK</span>
-          </button>
+            <span>Developer SDK Docs</span>
+          </Link>
 
           {/* Swagger API Docs Button */}
           <a
@@ -73,10 +76,10 @@ export function WalletHeader() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 backdrop-blur-md text-[11px] sm:text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500 transition-all cursor-pointer shadow-sm active:scale-95"
-            title="Open Swagger REST API Interactive Documentation (http://localhost:10010/api/docs)"
+            title="Open Swagger REST API Interactive Documentation"
           >
             <FileText className="size-3.5 sm:size-4 text-emerald-400 shrink-0" />
-            <span>API Docs (Swagger)</span>
+            <span>Swagger UI</span>
             <ExternalLink className="size-3 shrink-0 opacity-75" />
           </a>
 

@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocsRouteImport } from './routes/docs'
+import { Route as SdkRouteImport } from './routes/sdk'
 import { Route as ApiPublicCryptoWithdrawRecordTransactionRouteImport } from './routes/api/public/crypto-withdraw/record-transaction'
 import { Route as ApiPublicCryptoWithdrawTransactionsRouteImport } from './routes/api/public/crypto-withdraw/transactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SdkRoute = SdkRouteImport.update({
+  id: '/sdk',
+  path: '/sdk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicCryptoWithdrawRecordTransactionRoute =
@@ -33,17 +45,23 @@ const ApiPublicCryptoWithdrawTransactionsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/sdk': typeof SdkRoute
   '/api/public/crypto-withdraw/record-transaction': typeof ApiPublicCryptoWithdrawRecordTransactionRoute
   '/api/public/crypto-withdraw/transactions': typeof ApiPublicCryptoWithdrawTransactionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/sdk': typeof SdkRoute
   '/api/public/crypto-withdraw/record-transaction': typeof ApiPublicCryptoWithdrawRecordTransactionRoute
   '/api/public/crypto-withdraw/transactions': typeof ApiPublicCryptoWithdrawTransactionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/sdk': typeof SdkRoute
   '/api/public/crypto-withdraw/record-transaction': typeof ApiPublicCryptoWithdrawRecordTransactionRoute
   '/api/public/crypto-withdraw/transactions': typeof ApiPublicCryptoWithdrawTransactionsRoute
 }
@@ -51,22 +69,30 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/docs'
+    | '/sdk'
     | '/api/public/crypto-withdraw/record-transaction'
     | '/api/public/crypto-withdraw/transactions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/docs'
+    | '/sdk'
     | '/api/public/crypto-withdraw/record-transaction'
     | '/api/public/crypto-withdraw/transactions'
   id:
     | '__root__'
     | '/'
+    | '/docs'
+    | '/sdk'
     | '/api/public/crypto-withdraw/record-transaction'
     | '/api/public/crypto-withdraw/transactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsRoute: typeof DocsRoute
+  SdkRoute: typeof SdkRoute
   ApiPublicCryptoWithdrawRecordTransactionRoute: typeof ApiPublicCryptoWithdrawRecordTransactionRoute
   ApiPublicCryptoWithdrawTransactionsRoute: typeof ApiPublicCryptoWithdrawTransactionsRoute
 }
@@ -78,6 +104,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sdk': {
+      id: '/sdk'
+      path: '/sdk'
+      fullPath: '/sdk'
+      preLoaderRoute: typeof SdkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/crypto-withdraw/record-transaction': {
@@ -99,6 +139,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsRoute: DocsRoute,
+  SdkRoute: SdkRoute,
   ApiPublicCryptoWithdrawRecordTransactionRoute:
     ApiPublicCryptoWithdrawRecordTransactionRoute,
   ApiPublicCryptoWithdrawTransactionsRoute:
